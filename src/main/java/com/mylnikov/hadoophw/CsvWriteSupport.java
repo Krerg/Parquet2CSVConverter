@@ -12,12 +12,14 @@ import parquet.io.api.Binary;
 import parquet.io.api.RecordConsumer;
 import parquet.schema.MessageType;
 
+/**
+ * Custom {@link WriteSupport} for writing data to parquet. Stores schema, so could write whole row.
+ */
 public class CsvWriteSupport extends WriteSupport<List<String>> {
     MessageType schema;
     RecordConsumer recordConsumer;
     List<ColumnDescriptor> cols;
 
-    // TODO: support specifying encodings and compression
     public CsvWriteSupport(MessageType schema) {
         this.schema = schema;
         this.cols = schema.getColumns();
@@ -43,7 +45,6 @@ public class CsvWriteSupport extends WriteSupport<List<String>> {
         recordConsumer.startMessage();
         for (int i = 0; i < cols.size(); ++i) {
             String val = values.get(i);
-            // val.length() == 0 indicates a NULL value.
             if (val.length() > 0) {
                 recordConsumer.startField(cols.get(i).getPath()[0], i);
                 switch (cols.get(i).getType()) {
