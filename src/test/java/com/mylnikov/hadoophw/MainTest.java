@@ -13,6 +13,8 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import java.io.IOException;
+
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({Main.class, FileUtils.class})
 public class MainTest {
@@ -38,7 +40,7 @@ public class MainTest {
     public void shouldSuccessfullyInitController() throws Exception {
         MockitoAnnotations.initMocks(this);
         PowerMockito.whenNew(HdfsController.class).withAnyArguments().thenReturn(hdfsController);
-        main.main(null);
+        main.main(new String[0]);
     }
 
     @Test
@@ -55,6 +57,15 @@ public class MainTest {
         PowerMockito.whenNew(ParquetConverter.class).withAnyArguments().thenReturn(mockParquetConverter);
         main.main(new String[0]);
         Mockito.verify(mockParquetConverter, Mockito.times(1)).fromCSV(Mockito.any());
+    }
+
+    @Test(expected = IOException.class)
+    public void shouldHandleException() throws Exception {
+        MockitoAnnotations.initMocks(this);
+        PowerMockito.whenNew(HdfsController.class).withAnyArguments().thenReturn(hdfsController);
+        Mockito.when(hdfsController.getFiles(Mockito.any(String.class))).thenThrow(new IOException("Test message"));
+        PowerMockito.whenNew(ParquetConverter.class).withAnyArguments().thenReturn(mockParquetConverter);
+        main.main(new String[0]);
     }
 
 }

@@ -21,7 +21,7 @@ public class Main {
             convertFilesToParquetFromFolder(hdfsController, "/usr/admin");
         } catch (IOException ex) {
             LOGGER.error("Unable to parse files: " + ex.getLocalizedMessage());
-            System.exit(1);
+            throw ex;
         }
     }
 
