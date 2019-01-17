@@ -32,7 +32,7 @@ public class ParquetConverter {
 
     public File fromCSV(File srcCSV, String destFilder) throws IOException {
         String resultFilePath = destFilder + srcCSV.getName().split("\\.")[0]+".parquet";
-        LOGGER.info("Result file name " + resultFilePath);
+        LOGGER.info("Result file name {}", resultFilePath);
         Path path = new Path(resultFilePath);
         String rawSchema = getSchema(srcCSV);
         MessageType schema = MessageTypeParser.parseMessageType(rawSchema);

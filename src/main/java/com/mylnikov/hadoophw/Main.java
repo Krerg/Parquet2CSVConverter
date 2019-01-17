@@ -36,9 +36,9 @@ public class Main {
             File out = new File(file.getPath().getName());
             try {
                 FileUtils.copyToFile(hdfsController.getInputStream(file.getPath()), out);
-                LOGGER.info("File:" + out.getName() + " was successfully downloaded");
+                LOGGER.info("File: {} was successfully downloaded", out.getName());
                 parquetConverter.fromCSV(out);
-                LOGGER.info("File:" + out.getName() + " was successfully converted to parquet and uploaded to admin folder");
+                LOGGER.info("File: {}  was successfully converted to parquet and uploaded to admin folder", out.getName());
             }  finally {
                 out.delete();
             }
