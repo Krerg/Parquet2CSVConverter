@@ -12,8 +12,10 @@ public class Main {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
+    private static final String DEFAULT_HDFS_URI = "hdfs://sandbox-hdp.hortonworks.com:8020";
+
     public static void main(String[] args) throws IOException {
-        HdfsController hdfsController = new HdfsController("hdfs://sandbox-hdp.hortonworks.com:8020");
+        HdfsController hdfsController = new HdfsController(args.length > 0 ? args[0] : DEFAULT_HDFS_URI);
         LOGGER.info("HDFSController successfull initialized");
         try {
             convertFilesToParquetFromFolder(hdfsController, "/usr/admin");

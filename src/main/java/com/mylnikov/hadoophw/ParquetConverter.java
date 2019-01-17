@@ -21,13 +21,15 @@ public class ParquetConverter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ParquetConverter.class);
 
-    private static final String CSV_DELIMITER= ",";
+    private static final String CSV_DELIMITER = ",";
+
+    private static final String ADMIN_FOLDER_PATH = "../admin/";
 
     /**
      * Converts csv to parquet and uploads to admin folder.
      */
     public File fromCSV(File srcCSV) throws IOException {
-        return fromCSV(srcCSV, "../admin/");
+        return fromCSV(srcCSV, ADMIN_FOLDER_PATH);
     }
 
     public File fromCSV(File srcCSV, String destFilder) throws IOException {
