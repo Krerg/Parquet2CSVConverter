@@ -20,7 +20,7 @@ public class CsvWriteSupport extends WriteSupport<List<String>> {
     RecordConsumer recordConsumer;
     List<ColumnDescriptor> cols;
 
-    public CsvWriteSupport(MessageType schema) {
+    CsvWriteSupport(MessageType schema) {
         this.schema = schema;
         this.cols = schema.getColumns();
     }

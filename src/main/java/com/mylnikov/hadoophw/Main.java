@@ -1,11 +1,7 @@
 package com.mylnikov.hadoophw;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileStatus;
-import org.apache.hadoop.fs.FileSystem;
-import org.apache.hadoop.fs.Path;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,7 +10,7 @@ import java.io.IOException;
 
 public class Main {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(Main.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) throws IOException {
         HdfsController hdfsController = new HdfsController("hdfs://sandbox-hdp.hortonworks.com:8020");

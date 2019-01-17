@@ -1,14 +1,10 @@
 package com.mylnikov.hadoophw;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.FSDataInputStream;
-import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -21,7 +17,7 @@ public class HdfsController {
 
     private final FileSystem FS;
 
-    public HdfsController(String baseuri) throws IOException {
+    HdfsController(String baseuri) throws IOException {
         CONFIG = new Configuration();
         CONFIG.set("fs.defaultFS", baseuri);
         CONFIG.set("fs.hdfs.impl",
@@ -45,14 +41,6 @@ public class HdfsController {
      */
     public InputStream getInputStream(Path path) throws IOException {
         return FS.open(path);
-    }
-
-    public void uploadFile(File file, String folder) throws IOException {
-        Path uploadPath = new Path(folder + "/" + file.getName());
-        System.out.println("Uploading to:" + uploadPath.toString());
-        try(FSDataOutputStream outputStream = FS.create(uploadPath); FSDataInputStream inputStream = FS.open(new Path("/user/root/" + file.getName()))) {
-            IOUtils.copy(inputStream, outputStream);
-        }
     }
 
 }

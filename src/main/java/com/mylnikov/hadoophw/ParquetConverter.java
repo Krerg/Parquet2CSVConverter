@@ -21,7 +21,7 @@ public class ParquetConverter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ParquetConverter.class);
 
-    public static final String CSV_DELIMITER= ",";
+    private static final String CSV_DELIMITER= ",";
 
     /**
      * Converts csv to parquet and uploads to admin folder.
@@ -58,7 +58,7 @@ public class ParquetConverter {
         StringBuilder resultMessage = new StringBuilder().append("message csv {");
         int fieldCount = 1;
         for (String field: fields) {
-            resultMessage.append("required binary "+field + " = " + fieldCount++ + ";");
+            resultMessage.append("required binary ").append(field).append(" = ").append(fieldCount++).append(";");
         }
         resultMessage.append(" }");
         return resultMessage.toString();
